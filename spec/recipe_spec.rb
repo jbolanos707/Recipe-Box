@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe(Recipe) do
-
   it('has many ingredients') do
     new_recipe = Recipe.create(name: 'meatloaf')
     ingredient1 = Ingredient.create(description: 'turkey', recipe_id: new_recipe.id)
