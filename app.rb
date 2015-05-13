@@ -13,9 +13,16 @@ end
 
 post('/recipes') do
   name = params.fetch("name")
-  if Recipe.create(name: name)
+  new_recipe = Recipe.new(name: name)
+  if new_recipe.save()
     redirect('/recipes')
-  else 
+  else
     erb(:error)
   end
+end
+
+get('/recipes/:id') do
+  id = params.fetch('id')
+  @recipe = Recipe.find(id)
+  erb(:recipe)
 end
