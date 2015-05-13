@@ -1,0 +1,13 @@
+<h1>Categories</h1>
+<% if @categories.any?() %>
+<ul>
+  <% @categories.each() do |category| %>
+    <li><a href='/categories/<%= category.id %>'><%= category.name %></a></li>
+  <% end %>
+</ul>
+<% end %>
+<form action='/categories' method='post'>
+  <label for='name'>New Category:</label>
+  <input name='name' id='name' type='text'>
+  <button type='submit'>Add Category</button>
+</form>

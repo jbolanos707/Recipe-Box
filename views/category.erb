@@ -1,0 +1,16 @@
+<h1><%= @category.name %></h1>
+
+<h3>Recipes in this category:</h3>
+
+<% if @category.recipes.any?() %>
+  <ul>
+    <% @category.recipes.each do |recipe| %>
+    <li><%= recipe.name %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<form action='/categories/<%= @category.id %>' method='post'>
+  <input type='hidden' name='_method' value='delete'>
+  <button type='submit'>Delete This Category</button>
+</form>

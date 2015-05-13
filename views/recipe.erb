@@ -4,12 +4,19 @@
 
 
 <% if @ingredients.any?() %>
-  <ul>
+  <form action='/recipes/<%= @recipe.id %>/ingredients' method='post'>
+    <input type='hidden' name='_method' value='delete'>
     <% @ingredients.each() do |ingredient| %>
-      <li><%= ingredient.description %></li>
+      <div class='checkbox'>
+        <label>
+          <input type='checkbox' name='ingredient_ids[]' value='<%= ingredient.id %>'><%= ingredient.description %>
+        </label>
+      </div>
     <% end %>
-  </ul>
+    <button type='submit'>delete ingredients</button>
+  </form>
 <% end %>
+<br>
 
 <form action='/recipes/<%= @recipe.id %>' method='post'>
   <input id='description' name='description' type='text'>
@@ -22,11 +29,29 @@
   <input type='hidden' name='_method' value='patch'>
   <label for='rate'>Rate this ingredient</label>
   <select name='rate' id='rate'>
-    <option value= '1'>1</option>
-    <option value= '2'>2</option>
-    <option value= '3'>3</option>
-    <option value= '4'>4</option>
-    <option value= '5'>5</option>
+    <option value='1'>1</option>
+    <option value='2'>2</option>
+    <option value='3'>3</option>
+    <option value='4'>4</option>
+    <option value='5'>5</option>
   </select>
   <button type='submit'>Rate</button>
 </form>
+
+<form action='/recipes/<%= @recipe.id %>' method='post'>
+  <input type='hidden' name='_method' value='delete'>
+  <button type='submit'>Delete This Recipe</button>
+</form>
+
+<% if @categories.any?() %>
+  <form action='/recipes/<%= @recipe.id %>/categories' method='post'>
+    <% @categories.each() do |category| %>
+      <div class='checkbox'>
+        <label>
+          <input type='checkbox' name='category_ids[]' value='<%= category.id %>'><%= category.name %>
+        </label>
+      </div>
+    <% end %>
+    <button type='submit'>Submit Category</button>
+  </form>
+<% end %>
