@@ -15,4 +15,9 @@ describe(Recipe) do
     expect(Recipe.all()).to(eq([test_recipe3, test_recipe, test_recipe2]))
   end
 
+  it('validates presence of name') do
+    new_recipe = Recipe.new(name: '')
+    expect(new_recipe.save()).to(eq(false))
+  end
+
 end
