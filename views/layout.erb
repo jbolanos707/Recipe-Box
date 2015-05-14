@@ -5,10 +5,19 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
-  <div class='container'>
-  <%= yield %>
-  <br><br><br>
-  <a href='/'>Home</a>
-</div>
+  <div class='jumbotron'>
+    <nav class='navbar navbar-default navbar-fixed-top'>
+      <div class='container'>
+        <ul class='nav navbar-nav'>
+          <li class='active'><a href='/'>Home</a></li>
+          <li><a href='/recipes'>Recipes</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class='container'>
+    <%= yield %>
+    </div>
+
+  </div>
   </body>
 </html>
