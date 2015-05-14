@@ -1,6 +1,10 @@
 <h1><%= @recipe.name %></h1>
 
-<h3><small>Recipe Rating: <%= @recipe.rating %></small></h3>
+<h3><small>Recipe Calories Per Serving: <%= @recipe.count_calories.to_s %></small></h3>
+<h4><small>Total Cook Time:</small></h4>
+<h4><small>Recipe Rating: <%= @recipe.rating %></small></h4>
+
+
 
 
 <% if @ingredients.any?() %>
@@ -16,17 +20,22 @@
     <button type='submit'>delete ingredients</button>
   </form>
 <% end %>
+
 <br>
 
 <form action='/recipes/<%= @recipe.id %>' method='post'>
   <input id='description' name='description' type='text'>
   <label for='description'>Description</label>
+  <input id='calories' name='calories' type='number'>
+  <label for='calories'>Calories Per Serving</label>
   <button type='submit'>Add Ingredient</button>
 </form>
 <br><br><br>
 
 <form action='/recipes/<%= @recipe.id %>' method='post'>
   <input type='hidden' name='_method' value='patch'>
+  <label for='cook_time'>Cook Time:</label>
+  <input id='cook_time' name='cook_time' type='text'>
   <label for='rate'>Rate this ingredient</label>
   <select name='rate' id='rate'>
     <option value='1'>1</option>
@@ -37,12 +46,8 @@
   </select>
   <button type='submit'>Rate</button>
 </form>
-
-<form action='/recipes/<%= @recipe.id %>' method='post'>
-  <input type='hidden' name='_method' value='delete'>
-  <button type='submit'>Delete This Recipe</button>
-</form>
-
+<br><br>
+<p>Add this recipe to a category:</p>
 <% if @categories.any?() %>
   <form action='/recipes/<%= @recipe.id %>/categories' method='post'>
     <% @categories.each() do |category| %>
@@ -52,6 +57,18 @@
         </label>
       </div>
     <% end %>
-    <button type='submit'>Submit Category</button>
+    <button type='submit'>Submit</button>
   </form>
 <% end %>
+<br><br>
+<p>Tags</p>
+<% if @tags.any?() %>
+    <% @tags.each() do |tag| %>
+        <a href='/category/<%= tag.id %>'><%= tag.name %></a>
+    <% end %>
+<% end %>
+<br><br>
+<form action='/recipes/<%= @recipe.id %>' method='post'>
+  <input type='hidden' name='_method' value='delete'>
+  <button type='submit'>Delete This Recipe</button>
+</form>
