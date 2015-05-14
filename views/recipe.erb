@@ -1,7 +1,8 @@
 <h1><%= @recipe.name %></h1>
 
 <h3><small>Recipe Calories Per Serving: <%= @recipe.count_calories.to_s %></small></h3>
-<h4><small>Total Cook Time:</small></h4>
+<h4><small>Total Cook Time: <%= @recipe.cook_time %></small></h4>
+<h4><small>Difficulty: <%= @recipe.difficulty %></small></h4>
 <h4><small>Recipe Rating: <%= @recipe.rating %></small></h4>
 
 
@@ -36,15 +37,23 @@
   <input type='hidden' name='_method' value='patch'>
   <label for='cook_time'>Cook Time:</label>
   <input id='cook_time' name='cook_time' type='text'>
+  <label for='difficulty'>Difficulty Level</label>
+  <select name='difficulty' id='difficulty'>
+    <option value=''>Select Difficulty</option>
+    <option value='easy'>Easy</option>
+    <option value='intermediate'>Intermediate</option>
+    <option value='difficult'>Difficult</option>
+  </select>
   <label for='rate'>Rate this ingredient</label>
   <select name='rate' id='rate'>
+    <option value=''>Please select</option>
     <option value='1'>1</option>
     <option value='2'>2</option>
     <option value='3'>3</option>
     <option value='4'>4</option>
     <option value='5'>5</option>
   </select>
-  <button type='submit'>Rate</button>
+  <button type='submit'>Submit</button>
 </form>
 <br><br>
 <p>Add this recipe to a category:</p>

@@ -1,5 +1,6 @@
 require('bundler/setup')
 Bundler.require(:default)
+require('pry')
 also_reload('./lib/**/*.rb')
 Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
 
@@ -45,10 +46,17 @@ end
 
 patch('/recipes/:id') do
   recipe_id = params.fetch('id').to_i
-  recipe_rate = params.fetch("rate")
-  cook_time = params.fetch('cook_time')
   recipe = Recipe.find(recipe_id)
-  recipe.update(rating: recipe_rate, cook_time: cook_time)
+
+  # recipe_rate = params.fetch('rate', recipe.rating)
+  # cook_time = params.fetch('cook_time', recipe.cook_time)
+  # difficulty = params.fetch('difficulty', recipe.difficulty)
+
+  recipe_rate = params.fetch('rate') == '' ?  recipe.rating : params.fetch('rate')
+  cook_time = params.fetch('cook_time') == '' ? recipe.cook_time : params.fetch('cook_time')
+  difficulty = params.fetch('difficulty') == '' ? recipe.difficulty : params.fetch('difficulty')
+
+  recipe.update(rating: recipe_rate, cook_time: cook_time, difficulty: difficulty)
 
   redirect('/recipes/'.concat(recipe_id.to_s))
 end
